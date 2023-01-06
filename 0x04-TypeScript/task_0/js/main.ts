@@ -23,15 +23,34 @@ const studentList: Student[] = [student1, student2];
 
 const table: HTMLTableElement = document.createElement('table');
 
-studentList.forEach((student: Student) => {
-	const tr: HTMLTableRowElement = document.createElement('tr');
+const tableHeader: HTMLTableSectionElement = document.createElement('thead');
+const tableBody: HTMLTableSectionElement = document.createElement('tbody');
+
+const tableHeaderRow: HTMLTableRowElement = document.createElement('tr');
+
+const nameHeader: HTMLTableCellElement = document.createElement('th');
+const locationHeader: HTMLTableCellElement = document.createElement('th');
+
+nameHeader.innerText = 'Name';
+locationHeader.innerText = 'Location';
+
+tableHeaderRow.append(nameHeader, locationHeader);
+tableHeader.append(tableHeaderRow);
+
+studentList.forEach((student) => {
+	const tableBodyRow: HTMLTableRowElement = document.createElement('tr');
 
 	const nameRow: HTMLTableCellElement = document.createElement('td');
 	nameRow.innerText = student.firstName;
 
 	const locationRow: HTMLTableCellElement = document.createElement('td');
-	nameRow.innerText = student.firstName;
+	locationRow.innerText = student.location;
 
-	tr.append(nameRow, locationRow);
-	table.appendChild(tr);
+	tableBodyRow.append(nameRow, locationRow);
+	tableBody.appendChild(tableBodyRow);
 });
+
+table.append(tableHeader, tableBody);
+
+document.body.append(table);
+document.title = 'TypeScript - Task 0';
